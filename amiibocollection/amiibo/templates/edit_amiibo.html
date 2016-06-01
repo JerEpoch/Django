@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if amiibo.id %}
+<h1>Edit Amiibo</h1>
+{% else %}
+<h1>Add an Amiibo</h1>
+{% endif %}
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+  <input id="save_amiibo" type="submit" value="Add Amiibo" />
+</form>
+
+
+<a href="{% url "amiibo-list" %}">Back to list</a>
+{% endblock %}

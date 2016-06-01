@@ -1,0 +1,14 @@
+
+<h1>Delete an Amiibo</h1>
+{% block content %}
+
+<p>You are about to delete {{ amiibo }} from your collection</p>
+
+<form action="{% url "amiibo-delete" pk=amiibo.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Yes, delete." />
+  <a href="{% url "amiibo-list" %}">No, cancel.</a>
+</form>
+
+{% endblock %}
