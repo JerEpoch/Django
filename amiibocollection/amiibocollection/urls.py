@@ -30,10 +30,12 @@ urlpatterns = [
         name='amiibo-edit',),
     url(r'^(?P<pk>\d+)/$', amiibo.views.AmiiboView.as_view(),
         name='amiibo-view',),
-    url(r'^login/$','django.contrib.auth.views.login'),
+    #url(r'^(?P<pk>\d+)/$', name='regigster-success'),
+    url(r'^login/$','django.contrib.auth.views.login', name='login'),
     url(r'^logout/$','django.contrib.auth.views.logout',{'next_page': 'django.contrib.auth.views.login'}),
     url(r'^register/$',amiibo.views.AmiiboRegister.as_view(),
-            name='amiibo-register'),
+            name='amiibo-register',),
+    #url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 

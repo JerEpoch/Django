@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import View, ListView, CreateView, DeleteView, UpdateView, DetailView
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,8 @@ from amiibo.models import Amiibo
 from django.core.exceptions import PermissionDenied
 from .forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import render_to_response
 # Create your views here.
 
 
@@ -32,9 +34,14 @@ class AmiiboRegister(CreateView):
     template_name = 'amiibo_register.html'
     form_class = UserCreationForm
 
+    def get_success_url(self,request,user):
+        return ('amiibo-list')
+
     def form_valid(self, form):
         form.save()
-        return self.render_to_response(self.get_context_data(form=form))
+        #return self.render_to_response(self.get_context_data(form=form))
+        return render_to_response('registration/registersuccess.html',)
+        #return HttpResponseRedirect(reverse('amiibo-list'))
         #form.owner = request.user
         #return super(AmiiboRegister, self).form_valid(form)
 
@@ -65,8 +72,16 @@ class CreateAmiiboView(LoggedInMixin,CreateView):
 
     model = Amiibo
     template_name = 'edit_amiibo.html'
-    #fields = ('name','series')
-    fields = "__all__"
+    fields = ('name','series')
+    #fields = "__all__"
+
+
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.owner = self.request.user
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())
 
 
     def get_success_url(self):

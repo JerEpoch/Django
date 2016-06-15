@@ -32,13 +32,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+
     'django.contrib.admin',
+    #'registration',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'amiibo',
+
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -70,12 +75,14 @@ TEMPLATES = [
     },
 ]
 TEMPLATE_DIRS = [
-    'amiibo/templates'
+    'amiibo/templates',
 ]
 WSGI_APPLICATION = 'amiibocollection.wsgi.application'
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'django.contrib.auth.views.login'
+#LOGIN_URL = '/accounts/login/'
+#REGISTRATION_AUTO_LOGIN = True
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
