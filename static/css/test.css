@@ -1,0 +1,31 @@
+
+
+
+
+.title-thing {
+  color: blue;
+  font-size: 50px;
+  text-align: center;
+}
+
+.nav-bar1 {
+  border: 1px solid #555;
+  margin: 0;
+  padding: 0;
+  width: 10%;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+  background-color: #f1f1f1;
+}
+
+.screen1 {
+  margin-left: 10%;
+  padding: 1px 16px;
+}
+
+.menu-list {
+  display: block;
+  border-bottom: 1px solid #555;
+  padding: 6px 0 8px 16px;
+}

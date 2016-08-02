@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/test.css' %}">
+<div class="screen1">
+
+<h1>Delete an Amiibo</h1>
+
+
+<p>You are about to delete {{ amiibo }} from your collection</p>
+
+<form action="{% url "amiibo-delete" pk=amiibo.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Yes, delete." />
+  <a href="{% url "amiibo-list" %}">No, cancel.</a>
+</form>
+</div>
+{% endblock %}

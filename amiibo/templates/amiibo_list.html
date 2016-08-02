@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load app_filters %}
+{% block content %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/test.css' %}">
+<div class="screen1">
+<h2>Your Amiibos</h2>
+
+<ul>
+  {% for amiibo in object_list %}
+    <li class="amiibo">
+    <!--  <a href="{{ amiibo.get_absolute_url }}">{{ amiibo.name }}({{ amiibo.series }})</a> -->
+      {{ amiibo.name }}({{ amiibo.series }})
+
+      (<a href="{% url "amiibo-edit" pk=amiibo.id %}">Edit</a>)
+      (<a href="{% url "amiibo-delete" pk=amiibo.id %}">Delete</a>)
+  </li>
+  {% endfor %}
+</ul>
+
+
+{% get_grandTotal as gtotal %}
+Your Collection is worth:$ {{ gtotal.test_total1|floatformat:"2" }}
+<p></p>
+
+<a href="{% url "amiibo-new" %}">Add an Amiibo</a>
+</div>
+{% endblock %}

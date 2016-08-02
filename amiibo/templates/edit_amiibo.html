@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/test.css' %}">
+
+{% if amiibo.id %}
+<div class="screen1">
+  <h1>Edit Amiibo</h1>
+{% else %}
+<div class="screen1">
+  <h1>Add an Amiibo</h1>
+{% endif %}
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+  <input id="save_amiibo" type="submit" value="Add Amiibo" />
+</form>
+
+
+<a href="{% url "amiibo-list" %}">Back to list</a>
+</div>
+</div>
+{% endblock %}
